@@ -1,32 +1,32 @@
 package com.todo.todolist.domain.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 @Data
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "todoList")
-public class TodoEntity {
+@Table(name = "todo_user")
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long todoId;
+    private Long id;
 
     @Column
-    private String title;
+    private String userId;
 
     @Column
-    private String content;
+    private String password;
 
-    private LocalDateTime regDate;
+    @Column
+    private String name;
 
 
 
