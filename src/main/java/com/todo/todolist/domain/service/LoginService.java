@@ -4,7 +4,7 @@ import com.todo.todolist.domain.dto.LoginDto;
 
 public interface LoginService {
 
-    void login(LoginDto loginDto);
+    boolean login(LoginDto loginDto);
 
     void logout();
 
