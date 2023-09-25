@@ -4,6 +4,7 @@ import com.todo.todolist.domain.dto.TodoInsert;
 import com.todo.todolist.domain.exception.ErrorMessages;
 import com.todo.todolist.domain.exception.ErrorStatus;
 import com.todo.todolist.domain.exception.TodoErrorException;
+import com.todo.todolist.domain.service.TodoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/todo")
 public class TodoController {
 
+    private final TodoService todoService;
 
     // select
     @GetMapping()
@@ -26,14 +28,13 @@ public class TodoController {
         return null;
     }
 
-
     // insert
     @PostMapping()
     public ResponseEntity<?> addTodo(@RequestBody @Valid TodoInsert todoInsert, BindingResult bindingResult){
 
+
         return null;
     }
-
 
     // update
     @PutMapping()
@@ -41,14 +42,11 @@ public class TodoController {
         return null;
     }
 
-
     // delete
     @DeleteMapping()
     public ResponseEntity<?> removeTodo(){
 
         return null;
     }
-
-
 
 }
