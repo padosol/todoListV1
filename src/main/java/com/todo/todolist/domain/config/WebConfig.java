@@ -13,6 +13,7 @@ public class WebConfig implements WebMvcConfigurer {
         WebMvcConfigurer.super.addInterceptors(registry);
     }
 
+    // test
 
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
