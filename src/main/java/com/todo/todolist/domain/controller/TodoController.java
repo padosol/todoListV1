@@ -30,10 +30,16 @@ public class TodoController {
 
     // insert
     @PostMapping()
-    public ResponseEntity<?> addTodo(@RequestBody @Valid TodoInsert todoInsert, BindingResult bindingResult){
+    public ResponseEntity<?> addTodo(@RequestBody @Valid TodoInsert todoInsert){
 
+        try {
+            todoService.insertTodo(todoInsert);
 
-        return null;
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch(Exception e){
+            throw new RuntimeException();
+        }
+
     }
 
     // update
