@@ -1,5 +1,6 @@
 package com.todo.todolist.domain.service;
 
+import com.todo.todolist.domain.dto.TodoDelete;
 import com.todo.todolist.domain.dto.TodoInsert;
 import com.todo.todolist.domain.dto.TodoUpdate;
 import com.todo.todolist.domain.vo.ToDoList;
@@ -11,6 +12,8 @@ public interface TodoService {
     void insertTodo(TodoInsert todoInsert);
 
     void updateTodo(TodoUpdate todoUpdate);
+
+    void deleteTodo(TodoDelete todoDelete);
 
     List<ToDoList> selectAllTodo(String userId);
 

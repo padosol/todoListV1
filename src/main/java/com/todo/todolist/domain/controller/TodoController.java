@@ -1,6 +1,8 @@
 package com.todo.todolist.domain.controller;
 
+import com.todo.todolist.domain.dto.TodoDelete;
 import com.todo.todolist.domain.dto.TodoInsert;
+import com.todo.todolist.domain.dto.TodoUpdate;
 import com.todo.todolist.domain.service.TodoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -40,15 +42,27 @@ public class TodoController {
 
     // update
     @PutMapping()
-    public ResponseEntity<?> modifyTodo(){
-        return null;
+    public ResponseEntity<?> modifyTodo(TodoUpdate todoUpdate){
+        try {
+            todoService.updateTodo(todoUpdate);
+
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch(Exception e){
+            throw e;
+        }
     }
 
     // delete
     @DeleteMapping()
-    public ResponseEntity<?> removeTodo(){
+    public ResponseEntity<?> removeTodo(TodoDelete todoDelete){
 
-        return null;
+        try {
+            todoService.deleteTodo(todoDelete);
+
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch(Exception e){
+            throw e;
+        }
     }
 
 }

@@ -1,5 +1,6 @@
 package com.todo.todolist.domain.service.impl;
 
+import com.todo.todolist.domain.dto.TodoDelete;
 import com.todo.todolist.domain.dto.TodoInsert;
 import com.todo.todolist.domain.dto.TodoUpdate;
 import com.todo.todolist.domain.entity.TodoEntity;
@@ -24,13 +25,23 @@ public class TodoServiceImpl implements TodoService {
                         .title(todoInsert.getTitle())
                         .content(todoInsert.getContent()).build();
 
-        //test
-
         todoRepository.save(todo);
     }
 
     @Override
     public void updateTodo(TodoUpdate todoUpdate) {
+
+        TodoEntity existTodo = todoRepository.findById(todoUpdate.getTodoId()).get();
+        existTodo.setTitle(todoUpdate.getTitle());
+        existTodo.setContent(todoUpdate.getContent());
+
+        // save by
+        todoRepository.save(existTodo);
+    }
+
+    @Override
+    public void deleteTodo(TodoDelete todoDelete) {
+
     }
 
     @Override
