@@ -1,0 +1,1 @@
+insert into todo_user (id, name, password, user_id) values ('test', 'tester', 'test', 'test');

@@ -7,6 +7,6 @@ public class TodoDelete {
 
     private String userId;
 
-    private String todoId;
+    private Long todoId;
 
 }

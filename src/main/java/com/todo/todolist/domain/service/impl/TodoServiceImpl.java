@@ -2,6 +2,7 @@ package com.todo.todolist.domain.service.impl;
 
 import com.todo.todolist.domain.dto.TodoDelete;
 import com.todo.todolist.domain.dto.TodoInsert;
+import com.todo.todolist.domain.dto.TodoList;
 import com.todo.todolist.domain.dto.TodoUpdate;
 import com.todo.todolist.domain.entity.TodoEntity;
 import com.todo.todolist.domain.repository.TodoRepository;
@@ -42,6 +43,10 @@ public class TodoServiceImpl implements TodoService {
     @Override
     public void deleteTodo(TodoDelete todoDelete) {
 
+        TodoEntity todo = TodoEntity.builder()
+                        .todoId(todoDelete.getTodoId()).build();
+
+        todoRepository.delete(todo);
     }
 
     @Override
@@ -50,7 +55,12 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    public ToDoList selectOneTodo(String userId, String todoId) {
-        return null;
+    public TodoList selectOneTodo(String userId, Long todoId) {
+        TodoEntity todo = todoRepository.findById(todoId).orElseThrow(() -> new RuntimeException());
+
+        return TodoList.builder()
+                .title(todo.getTitle())
+                .content(todo.getContent()).build();
     }
+
 }

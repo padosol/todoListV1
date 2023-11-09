@@ -29,7 +29,4 @@ public class TodoEntity {
     private LocalDateTime regDate;
 
 
-
-
-
 }

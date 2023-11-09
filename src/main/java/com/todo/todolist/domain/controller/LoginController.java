@@ -29,7 +29,7 @@ public class LoginController {
 //
 //        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(loginDto, HttpStatus.OK);
     }
 
     @PostMapping(value = "/logout")

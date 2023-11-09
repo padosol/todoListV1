@@ -2,8 +2,10 @@ package com.todo.todolist.domain.controller;
 
 import com.todo.todolist.domain.dto.TodoDelete;
 import com.todo.todolist.domain.dto.TodoInsert;
+import com.todo.todolist.domain.dto.TodoList;
 import com.todo.todolist.domain.dto.TodoUpdate;
 import com.todo.todolist.domain.service.TodoService;
+import com.todo.todolist.domain.vo.ToDoList;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +26,20 @@ public class TodoController {
     public ResponseEntity<?> todoList(){
 
         return null;
+    }
+
+    // selectOne
+    @GetMapping("/{id}")
+    public ResponseEntity<TodoList> getTodoList(@PathVariable Long id){
+
+        try {
+            TodoList toDoList = todoService.selectOneTodo(null, id);
+
+            return new ResponseEntity<>(toDoList, HttpStatus.OK);
+        } catch(Exception e){
+            throw e;
+        }
+
     }
 
     // insert

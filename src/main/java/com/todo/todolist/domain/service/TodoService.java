@@ -2,6 +2,7 @@ package com.todo.todolist.domain.service;
 
 import com.todo.todolist.domain.dto.TodoDelete;
 import com.todo.todolist.domain.dto.TodoInsert;
+import com.todo.todolist.domain.dto.TodoList;
 import com.todo.todolist.domain.dto.TodoUpdate;
 import com.todo.todolist.domain.vo.ToDoList;
 
@@ -17,7 +18,7 @@ public interface TodoService {
 
     List<ToDoList> selectAllTodo(String userId);
 
-    ToDoList selectOneTodo(String userId, String todoId);
+    TodoList selectOneTodo(String userId, Long todoId);
 
 
 }
