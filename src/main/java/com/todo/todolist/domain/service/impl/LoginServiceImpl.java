@@ -16,7 +16,7 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public boolean login(LoginDto loginDto) {
 
-        UserEntity user = userRepository.findUserEntityByUserId(loginDto.getUserId());
+        UserEntity user = userRepository.findUserEntityByUserId(loginDto.getUserId()).get();
 
         if(user.getUserId().equals(loginDto.getUserId()) &&
                 user.getPassword().equals(loginDto.getPassword())){

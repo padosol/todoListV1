@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Long findUserById(String id) {
-        UserEntity user = userRepository.findUserEntityByUserId(id);
+        UserEntity user = userRepository.findUserEntityByUserId(id).get();
         return null;
     }
 }

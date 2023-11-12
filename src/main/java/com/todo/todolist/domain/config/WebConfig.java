@@ -1,6 +1,5 @@
 package com.todo.todolist.domain.config;
 
-import org.hibernate.cfg.Environment;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;

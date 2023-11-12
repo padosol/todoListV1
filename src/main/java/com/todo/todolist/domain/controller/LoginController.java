@@ -19,17 +19,17 @@ public class LoginController {
     private final LoginService loginService;
 
     @PostMapping(value = "/login")
-    public ResponseEntity<?> login(@RequestBody @Valid LoginDto loginDto){
+    public ResponseEntity<?> login(){
 
-        boolean isSuccess = loginService.login(loginDto);
 
+        System.out.println("test");
 //        if(isSuccess) {
 //            return new ResponseEntity<>(HttpStatus.OK);
 //        }
 //
 //        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        return new ResponseEntity<>(loginDto, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping(value = "/logout")
