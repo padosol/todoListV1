@@ -25,12 +25,6 @@ public class SecurityConfig {
 
     private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
     private final CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
-    private final CustomAuthenticationProvider customAuthenticationProvider;
-
-    @Bean
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(customAuthenticationProvider);
-    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -43,11 +37,11 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/api/user").hasRole("USER")
+//                        .requestMatchers("/api/user").hasRole("USER")
                         .anyRequest().permitAll())
                 .formLogin(login -> login
                         .loginProcessingUrl("/api/login")
-                        .usernameParameter("loginId")
+                        .usernameParameter("email")
                         .passwordParameter("password")
                         .successHandler(customAuthenticationSuccessHandler)
                         .failureHandler(customAuthenticationFailureHandler))

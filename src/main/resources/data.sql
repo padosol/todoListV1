@@ -1,1 +1,1 @@
-insert into todo_user (id, name, password, user_id) values ('test', 'tester', 'test', 'test');
+insert into todo_user (id, name, password, user_id) values (1, 'tester', '1234', 'hzyan2@gmail.com');
