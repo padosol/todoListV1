@@ -6,10 +6,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @RequestMapping("/api/v1")
@@ -18,9 +16,8 @@ public class LoginController {
 
     private final LoginService loginService;
 
-    @PostMapping(value = "/login")
+    @PostMapping(value = "/login/success")
     public ResponseEntity<?> login(){
-
 
         System.out.println("test");
 //        if(isSuccess) {
@@ -31,6 +28,15 @@ public class LoginController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/login/fail")
+    public ResponseEntity<?> loginFail() {
+
+        System.out.println("로그인 실패");
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 
     @PostMapping(value = "/logout")
     public ResponseEntity<?> logout(){
