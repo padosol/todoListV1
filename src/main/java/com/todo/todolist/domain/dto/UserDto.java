@@ -10,7 +10,7 @@ import lombok.Data;
 public class UserDto {
 
     @NotBlank
-    private String userId;
+    private String userEmail;
     @NotBlank
     private String password;
     @NotBlank
@@ -18,7 +18,7 @@ public class UserDto {
 
     public UserEntity toEntity(){
         return UserEntity.builder()
-                .userId(userId)
+                .userEmail(userEmail)
                 .password(password)
                 .name(name).build();
     }

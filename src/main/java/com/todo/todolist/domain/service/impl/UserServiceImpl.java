@@ -14,16 +14,16 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public Long registerUser(UserDto userDto) {
+    public String registerUser(UserDto userDto) {
 
         UserEntity user = userDto.toEntity();
 
-        return  userRepository.save(user).getId();
+        return  userRepository.save(user).getUserEmail();
     }
 
     @Override
-    public Long findUserById(String id) {
-        UserEntity user = userRepository.findUserEntityByUserId(id).get();
+    public String findUserById(String id) {
+        UserEntity user = userRepository.findUserEntityByUserEmail(id).get();
         return null;
     }
 }

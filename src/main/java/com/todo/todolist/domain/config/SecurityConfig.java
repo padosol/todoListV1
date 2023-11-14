@@ -36,6 +36,7 @@ public class SecurityConfig {
 
         http
                 .csrf(AbstractHttpConfigurer::disable)
+                .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request
 //                        .requestMatchers("/api/user").hasRole("USER")
                         .anyRequest().permitAll())
@@ -43,7 +44,7 @@ public class SecurityConfig {
                         .loginProcessingUrl("/api/login")
                         .usernameParameter("email")
                         .passwordParameter("password")
-                        .successHandler(customAuthenticationSuccessHandler)
+                        .defaultSuccessUrl("/api/v1/login/success")
                         .failureHandler(customAuthenticationFailureHandler))
                 .sessionManagement(session -> session
                         .maximumSessions(1)

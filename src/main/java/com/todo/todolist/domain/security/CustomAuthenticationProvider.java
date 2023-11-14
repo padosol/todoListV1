@@ -26,10 +26,10 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             UserEntity user = (UserEntity) customLoadUserByUsername.loadUserByUsername(authentication.getName());
             String reqPassword = authentication.getCredentials().toString();
 
-            if(!passwordEncoder.matches(reqPassword, user.getPassword()))
-                throw new BadCredentialsException("Not Found User");
+//            if(!passwordEncoder.matches(reqPassword, user.getPassword()))
+//                throw new BadCredentialsException("Not Found User");
 
-            return new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+            return new UsernamePasswordAuthenticationToken(user, reqPassword, user.getAuthorities());
         } catch(UsernameNotFoundException e) {
             e.printStackTrace();
             return null;

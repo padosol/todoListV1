@@ -19,15 +19,11 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "todo_user")
+@Table(name = "tn_user")
 public class UserEntity implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    @Column
-    private String userId;
+    private String userEmail;
 
     @Column
     private String password;

@@ -1,11 +1,14 @@
 package com.todo.todolist.domain.controller;
 
+import com.todo.todolist.domain.config.SecurityConfig;
 import com.todo.todolist.domain.dto.LoginDto;
 import com.todo.todolist.domain.service.LoginService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -16,15 +19,12 @@ public class LoginController {
 
     private final LoginService loginService;
 
-    @PostMapping(value = "/login/success")
+    @GetMapping(value = "/login/success")
     public ResponseEntity<?> login(){
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
         System.out.println("test");
-//        if(isSuccess) {
-//            return new ResponseEntity<>(HttpStatus.OK);
-//        }
-//
-//        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

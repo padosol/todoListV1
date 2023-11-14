@@ -6,10 +6,10 @@ public interface UserService {
 
 
     // 회원가입
-    Long registerUser(UserDto userDto);
+    String registerUser(UserDto userDto);
 
     // 아이디 중복체크
-    Long findUserById(String id);
+    String findUserById(String userEmail);
 
 
 }
