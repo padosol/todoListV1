@@ -21,5 +21,6 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
         HttpSession session = request.getSession();
         session.setMaxInactiveInterval(60);
+
     }
 }

@@ -1,9 +1,6 @@
 package com.todo.todolist.domain.controller;
 
-import com.todo.todolist.domain.config.SecurityConfig;
-import com.todo.todolist.domain.dto.LoginDto;
 import com.todo.todolist.domain.service.LoginService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

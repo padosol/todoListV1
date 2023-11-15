@@ -5,6 +5,8 @@ import com.todo.todolist.domain.entity.UserEntity;
 import com.todo.todolist.domain.repository.UserRepository;
 import com.todo.todolist.domain.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,5 +27,12 @@ public class UserServiceImpl implements UserService {
     public String findUserById(String id) {
         UserEntity user = userRepository.findUserEntityByUserEmail(id).get();
         return null;
+    }
+
+    @Override
+    public UserEntity getUserInfo() {
+        String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userRepository.findUserEntityByUserEmail(userEmail)
+                .orElseThrow(() -> new UsernameNotFoundException("Not Found User"));
     }
 }
