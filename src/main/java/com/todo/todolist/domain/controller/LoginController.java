@@ -29,6 +29,11 @@ public class LoginController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @GetMapping("/hello")
+    public ResponseEntity<String> test() {
+        return new ResponseEntity<>("success", HttpStatus.OK);
+    }
+
     @GetMapping("/login/fail")
     public ResponseEntity<?> loginFail() {
 
@@ -36,7 +41,6 @@ public class LoginController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 
     @PostMapping(value = "/logout")
     public ResponseEntity<?> logout(){

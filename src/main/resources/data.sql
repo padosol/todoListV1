@@ -1,1 +1,0 @@
-insert into tn_user (user_email, password, role, name) values ('hzyan2@gmail.com', '1234', 'USER', 'tester');
