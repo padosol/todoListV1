@@ -26,6 +26,16 @@ public class LoginController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PostMapping(value = "/login/success")
+    public ResponseEntity<?> loginPost(){
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        System.out.println("test");
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @GetMapping("/hello")
     public ResponseEntity<String> test() {
         return new ResponseEntity<>("success", HttpStatus.OK);
