@@ -44,9 +44,7 @@ public class LoginController {
     @GetMapping("/login/fail")
     public ResponseEntity<?> loginFail() {
 
-        System.out.println("로그인 실패");
-
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping(value = "/logout")

@@ -19,10 +19,10 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
         log.info("Authentication {}", authentication);
 
-        HttpSession session = request.getSession();
-        session.setMaxInactiveInterval(60);
+//        HttpSession session = request.getSession();
+//        session.setMaxInactiveInterval(60);
 
-        request.getRequestDispatcher("/api/v1/login/success").forward(request, response);
+//        request.getRequestDispatcher("/api/v1/login/success").forward(request, response);
 //        response.sendRedirect("http://localhost:5173/api/v1/login/success");
 
     }
