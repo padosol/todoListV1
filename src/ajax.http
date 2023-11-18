@@ -4,6 +4,6 @@ Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 
 {
-  "userEmail": "hzyan2@gmail.com",
+  "username": "hzyan2@gmail.com",
   "password": "test"
 }

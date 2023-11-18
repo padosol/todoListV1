@@ -6,6 +6,7 @@ import com.todo.todolist.domain.security.AjaxAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -18,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+@Order(0)
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -43,11 +45,12 @@ public class SecurityConfig{
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request
-                        .anyRequest().authenticated())
+                        .requestMatchers("/api/**").authenticated()
+                        .anyRequest().permitAll())
                 .formLogin(login -> login
                         .loginPage("http://localhost:5173/login")
                         .loginProcessingUrl("/api/login")
-                        .usernameParameter("userEmail")
+                        .usernameParameter("username")
                         .passwordParameter("password")
                         .successHandler(customAuthenticationSuccessHandler)
                         .failureHandler(customAuthenticationFailureHandler))
@@ -61,11 +64,16 @@ public class SecurityConfig{
     }
 
     @Bean
-    public AjaxAuthenticationFilter ajaxAuthenticationFilter() {
+    public AjaxAuthenticationFilter ajaxAuthenticationFilter() throws Exception {
         AjaxAuthenticationFilter ajaxAuthenticationFilter = new AjaxAuthenticationFilter();
+        ajaxAuthenticationFilter.setAuthenticationManager(authenticationManager());
 
+        return ajaxAuthenticationFilter;
+    }
 
-        return new AjaxAuthenticationFilter();
+    @Bean
+    public AuthenticationManager authenticationManager() throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
     }
 
 

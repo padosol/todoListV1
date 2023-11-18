@@ -5,18 +5,14 @@ import com.todo.todolist.domain.dto.UserDto;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.util.StringUtils;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 
 public class AjaxAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
@@ -25,23 +21,26 @@ public class AjaxAuthenticationFilter extends AbstractAuthenticationProcessingFi
 
 
     public AjaxAuthenticationFilter() {
-        super(new AntPathRequestMatcher("/api/login"), new ProviderManager());
+        super(new AntPathRequestMatcher("/api/login"));
     }
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
 
-        if(isAjax(request)) {
+        if(!isAjax(request)) {
             throw new IllegalStateException("Authentication is not supported");
         }
 
-        UserDto userDto = objectMapper.readValue(request.getReader(), UserDto.class);
-        if(!StringUtils.hasLength(userDto.getUserEmail()) || !StringUtils.hasLength(userDto.getPassword())) {
+        BufferedReader reader = request.getReader();
+
+        AccountDto accountDto = objectMapper.readValue(request.getReader(), AccountDto.class);
+
+        if(!StringUtils.hasLength(accountDto.getUsername()) || !StringUtils.hasLength(accountDto.getPassword())) {
             throw new IllegalArgumentException("username or password is empty");
         }
 
         AjaxAuthenticationToken token = new AjaxAuthenticationToken(
-                userDto.getUserEmail(),
-                userDto.getPassword()
+                accountDto.getUsername(),
+                accountDto.getPassword()
         );
 
         return getAuthenticationManager().authenticate(token);
