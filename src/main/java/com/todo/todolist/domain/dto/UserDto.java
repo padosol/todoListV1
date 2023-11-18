@@ -23,8 +23,4 @@ public class UserDto {
                 .name(name).build();
     }
 
-
-
-
-
 }
