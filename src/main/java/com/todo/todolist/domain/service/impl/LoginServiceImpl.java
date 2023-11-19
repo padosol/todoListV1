@@ -16,7 +16,7 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public boolean login(LoginDto loginDto) {
 
-        UserEntity user = userRepository.findUserEntityByUserEmail(loginDto.getUserId()).get();
+        UserEntity user = userRepository.findUserEntityByUsername(loginDto.getUserId()).get();
 
         return false;
     }

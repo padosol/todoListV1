@@ -1,18 +1,21 @@
 package com.todo.todolist.domain.security;
 
+import com.todo.todolist.domain.entity.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
+@Component
 @RequiredArgsConstructor
 public class AjaxAuthenticationProvider implements AuthenticationProvider {
 
-    private UserDetailsService userDetailsService;
-    private PasswordEncoder passwordEncoder;
+    private final UserDetailsService userDetailsService;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -20,13 +23,17 @@ public class AjaxAuthenticationProvider implements AuthenticationProvider {
         String loginId = authentication.getName();
         String password = (String) authentication.getCredentials();
 
-        UserDetails details = userDetailsService.loadUserByUsername(loginId);
+        UserEntity entity = (UserEntity) userDetailsService.loadUserByUsername(loginId);
 
-        return null;
+        if(!passwordEncoder.matches(password, entity.getPassword())) {
+            throw new BadCredentialsException("Invalid Password");
+        }
+
+        return new AjaxAuthenticationToken(entity, null, entity.getAuthorities());
     }
 
     @Override
     public boolean supports(Class<?> authentication) {
-        return false;
+        return authentication.equals(AjaxAuthenticationToken.class);
     }
 }

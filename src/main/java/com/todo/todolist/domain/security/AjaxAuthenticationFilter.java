@@ -1,24 +1,20 @@
 package com.todo.todolist.domain.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.todo.todolist.domain.dto.UserDto;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.util.StringUtils;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 
 public class AjaxAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
     private ObjectMapper objectMapper = new ObjectMapper();
-
 
     public AjaxAuthenticationFilter() {
         super(new AntPathRequestMatcher("/api/login"));
@@ -26,11 +22,9 @@ public class AjaxAuthenticationFilter extends AbstractAuthenticationProcessingFi
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
 
-        if(!isAjax(request)) {
+        if(!isPost(request)) {
             throw new IllegalStateException("Authentication is not supported");
         }
-
-        BufferedReader reader = request.getReader();
 
         AccountDto accountDto = objectMapper.readValue(request.getReader(), AccountDto.class);
 
@@ -38,17 +32,20 @@ public class AjaxAuthenticationFilter extends AbstractAuthenticationProcessingFi
             throw new IllegalArgumentException("username or password is empty");
         }
 
+        // 처음에는 인증 되지 않은 토큰 생성
         AjaxAuthenticationToken token = new AjaxAuthenticationToken(
                 accountDto.getUsername(),
                 accountDto.getPassword()
         );
 
-        return getAuthenticationManager().authenticate(token);
+        Authentication authenticate = getAuthenticationManager().authenticate(token);
+
+        return authenticate;
     }
 
-    private boolean isAjax(HttpServletRequest request) {
+    private boolean isPost(HttpServletRequest request) {
 
-        if("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
+        if("POST".equals(request.getMethod())) {
             return true;
         }
 

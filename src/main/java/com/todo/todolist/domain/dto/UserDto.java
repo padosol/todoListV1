@@ -18,7 +18,7 @@ public class UserDto {
 
     public UserEntity toEntity(){
         return UserEntity.builder()
-                .userEmail(userEmail)
+                .username(userEmail)
                 .password(password)
                 .name(name).build();
     }

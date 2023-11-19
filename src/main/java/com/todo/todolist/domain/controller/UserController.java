@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -27,9 +28,15 @@ public class UserController {
     @GetMapping("/me")
     public ResponseEntity<UserEntity> getUserInfo() {
 
-        UserEntity userInfo = userService.getUserInfo();
+        try {
+            UserEntity userInfo = userService.getUserInfo();
 
-        return new ResponseEntity<>(userInfo, HttpStatus.OK);
+            return new ResponseEntity<>(userInfo, HttpStatus.OK);
+        } catch(UsernameNotFoundException e) {
+            e.printStackTrace();
+            throw e;
+        }
+
     }
 
 }

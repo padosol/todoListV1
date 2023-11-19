@@ -20,7 +20,7 @@ class UserRepositoryTest {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         //given
         UserEntity entity = UserEntity.builder()
-                .userEmail("hzyan2@gmail.com")
+                .username("hzyan2@gmail.com")
                 .password(passwordEncoder.encode("test"))
                 .role("USER")
                 .name("test").build();
