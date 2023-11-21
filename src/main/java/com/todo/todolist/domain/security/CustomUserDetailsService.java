@@ -1,9 +1,8 @@
 package com.todo.todolist.domain.security;
 
-import com.todo.todolist.domain.entity.UserEntity;
-import com.todo.todolist.domain.repository.UserRepository;
+import com.todo.todolist.domain.user.entity.UserEntity;
+import com.todo.todolist.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

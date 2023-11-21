@@ -1,14 +1,13 @@
 package com.todo.todolist.domain.config;
 
-import com.todo.todolist.domain.handler.AjaxAccessDeniedHandler;
-import com.todo.todolist.domain.handler.CustomAuthenticationFailureHandler;
-import com.todo.todolist.domain.handler.CustomAuthenticationSuccessHandler;
-import com.todo.todolist.domain.security.AjaxAuthenticationFilter;
-import com.todo.todolist.domain.security.AjaxLoginAuthenticationEntryPoint;
+import com.todo.todolist.domain.security.CustomAccessDeniedHandler;
+import com.todo.todolist.domain.security.CustomAuthenticationFailureHandler;
+import com.todo.todolist.domain.security.CustomAuthenticationSuccessHandler;
+import com.todo.todolist.domain.security.CustomAuthenticationFilter;
+import com.todo.todolist.domain.security.CustomLoginAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -22,7 +21,6 @@ import org.springframework.security.web.context.DelegatingSecurityContextReposit
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.RequestAttributeSecurityContextRepository;
 
-@Order(0)
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -30,10 +28,9 @@ public class SecurityConfig{
 
     private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
     private final CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
-    private final AjaxLoginAuthenticationEntryPoint authenticationEntryPoint;
-    private final AjaxAccessDeniedHandler accessDeniedHandler;
-
+    private final CustomLoginAuthenticationEntryPoint authenticationEntryPoint;
     private final AuthenticationConfiguration authenticationConfiguration;
+    private final CustomAccessDeniedHandler accessDeniedHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder(){
@@ -54,33 +51,27 @@ public class SecurityConfig{
                         .authenticationEntryPoint(authenticationEntryPoint)
                         .accessDeniedHandler(accessDeniedHandler));
 
-//                .sessionManagement(session -> session
-//                        .maximumSessions(1)
-//                        .maxSessionsPreventsLogin(true));
-
         return http.build();
     }
 
     @Bean
-    public AjaxAuthenticationFilter ajaxAuthenticationFilter() throws Exception {
-        AjaxAuthenticationFilter ajaxAuthenticationFilter = new AjaxAuthenticationFilter();
-        ajaxAuthenticationFilter.setAuthenticationManager(authenticationManager());
-        ajaxAuthenticationFilter.setAuthenticationSuccessHandler(customAuthenticationSuccessHandler);
-        ajaxAuthenticationFilter.setAuthenticationFailureHandler(customAuthenticationFailureHandler);
-        ajaxAuthenticationFilter.setSecurityContextRepository(
+    public CustomAuthenticationFilter ajaxAuthenticationFilter() throws Exception {
+        CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter();
+        customAuthenticationFilter.setAuthenticationManager(authenticationManager());
+        customAuthenticationFilter.setAuthenticationSuccessHandler(customAuthenticationSuccessHandler);
+        customAuthenticationFilter.setAuthenticationFailureHandler(customAuthenticationFailureHandler);
+        customAuthenticationFilter.setSecurityContextRepository(
                 new DelegatingSecurityContextRepository(
                         new RequestAttributeSecurityContextRepository(),
                         new HttpSessionSecurityContextRepository()
                 ));
 
-        return ajaxAuthenticationFilter;
+        return customAuthenticationFilter;
     }
 
     @Bean
     public AuthenticationManager authenticationManager() throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
-
-
 
 }

@@ -1,11 +1,8 @@
 package com.todo.todolist.domain.exception;
 
 public enum ErrorMessages {
-    VALID_ERROR("올바른 데이터가 아닙니다.");
 
-    private String message;
+    VALID_ERROR(100, "올바른 데이터가 아닙니다.");
 
-    ErrorMessages(String message) {
-        this.message = message;
-    }
+    ErrorMessages(int errorCode, String message) {}
 }
