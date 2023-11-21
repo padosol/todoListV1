@@ -1,8 +1,8 @@
 package com.todo.todolist.domain.section.todo.entity;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
+import org.apache.catalina.User;
 
 import java.time.LocalDateTime;
 
@@ -10,12 +10,12 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
 @Table(name="tn_todo")
 public class TodoEntity {
 
     @Id
-    private String todoId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long todoId;
 
     private String username;
 
@@ -25,7 +25,10 @@ public class TodoEntity {
 
     private LocalDateTime registerDate;
 
-    // check or uncheck
     private String state;
+
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "username", referencedColumnName = "username")
+    User user;
 
 }
