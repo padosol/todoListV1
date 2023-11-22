@@ -9,11 +9,9 @@ import com.todo.todolist.domain.section.todo.repository.TodoRepository;
 import com.todo.todolist.domain.user.entity.UserEntity;
 import com.todo.todolist.domain.user.utils.UserUtils;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.Utilities;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,12 +51,22 @@ public class DefaultTodoService implements TodoService{
     }
 
     @Override
-    public void modify(TodoUpdateDto todoUpdateDto) {
+    public void modifyTodo(Long todoId, TodoUpdateDto todoUpdateDto) {
+
+        TodoEntity todoEntity = todoRepository.findById(todoId).get();
+
+
+
+
 
     }
 
     @Override
-    public void remove(TodoDeleteDto todoDeleteDto) {
+    public void removeTodo(Long todoId) {
+
+        TodoEntity todoEntity = todoRepository.findById(todoId).get();
+
+        todoRepository.delete(todoEntity);
 
     }
 

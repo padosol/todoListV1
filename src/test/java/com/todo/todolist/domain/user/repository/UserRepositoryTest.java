@@ -4,13 +4,13 @@ import com.todo.todolist.domain.user.entity.UserEntity;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 
-@SpringBootTest
+@DataJpaTest
 class UserRepositoryTest {
 
 
@@ -33,6 +33,9 @@ class UserRepositoryTest {
 
         UserEntity userEntity = userRepository.findUserEntityByUsername(user.getUsername())
                 .orElseThrow(() -> new UsernameNotFoundException("유저없음"));
+
+        System.out.println(userEntity);
+
 
     }
 

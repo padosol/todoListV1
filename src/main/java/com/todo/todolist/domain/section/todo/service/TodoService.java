@@ -19,10 +19,10 @@ public interface TodoService {
     void addTodo(TodoInsertDto todoInsertDto);
 
     // 수정
-    void modify(TodoUpdateDto todoUpdateDto);
+    void modifyTodo(TodoUpdateDto todoUpdateDto);
 
     // 삭제
-    void remove(TodoDeleteDto todoDeleteDto);
+    void removeTodo(Long todoId);
 
 
 }

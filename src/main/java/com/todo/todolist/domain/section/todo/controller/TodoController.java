@@ -17,7 +17,7 @@ public class TodoController {
 
     private final TodoService todoService;
 
-    // 조회
+    // 전체조회
     @GetMapping(value = "/v1/todos")
     public ResponseEntity<List<TodoResponseDto>> getTodos() {
 
@@ -38,25 +38,44 @@ public class TodoController {
     }
 
     // 등록
-    @PostMapping(value = "/v1/todos/{todoId}")
-    public ResponseEntity<Void> addTodo(@PathVariable Long todoId,
-                                        @RequestBody @Valid TodoInsertDto todoInsertDto) {
-        return null;
+    @PostMapping(value = "/v1/todos")
+    public ResponseEntity<Void> addTodo(@RequestBody @Valid TodoInsertDto todoInsertDto) {
+
+        try {
+            todoService.addTodo(todoInsertDto);
+
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch(Exception e) {
+            throw e;
+        }
+
     }
 
     // 수정
-    @PutMapping(value = "/v1/todos/{todoId}")
-    public ResponseEntity<Void> modifyTodo(@PathVariable Long todoId,
-                                           @RequestBody @Valid TodoUpdateDto todoUpdateDto) {
-        return null;
+    @PutMapping(value = "/v1/todos")
+    public ResponseEntity<Void> modifyTodo(@RequestBody @Valid TodoUpdateDto todoUpdateDto) {
+
+        try {
+            todoService.modifyTodo(todoUpdateDto);
+
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch(Exception e) {
+            throw e;
+        }
     }
 
     // 삭제
-    @DeleteMapping(value = "/v1/todos/{todoId}")
-    public ResponseEntity<Void> removeTodo(@PathVariable Long todoId,
-                                           @RequestBody @Valid TodoDeleteDto todoDeleteDto) {
-        return null;
-    }
+    @DeleteMapping(value = "/v1/todos")
+    public ResponseEntity<Void> removeTodo(@PathVariable Long todoId) {
 
+        try {
+            todoService.removeTodo(todoId);
+
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch(Exception e) {
+            throw e;
+        }
+
+    }
 
 }

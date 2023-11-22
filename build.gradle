@@ -30,7 +30,7 @@ dependencies {
 
 
     // postgresql
-    implementation group: 'org.postgresql', name: 'postgresql', version: '42.4.1'
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.4.3'
 
 
     // validation
@@ -45,6 +45,7 @@ dependencies {
 
     // test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'com.h2database:h2'
 }
 
 tasks.named('test') {
