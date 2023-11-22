@@ -52,11 +52,12 @@ public class TodoController {
     }
 
     // 수정
-    @PutMapping(value = "/v1/todos")
-    public ResponseEntity<Void> modifyTodo(@RequestBody @Valid TodoUpdateDto todoUpdateDto) {
+    @PutMapping(value = "/v1/todos/{todoId}")
+    public ResponseEntity<Void> modifyTodo(@PathVariable Long todoId,
+                                           @RequestBody @Valid TodoUpdateDto todoUpdateDto) {
 
         try {
-            todoService.modifyTodo(todoUpdateDto);
+            todoService.modifyTodo(todoId, todoUpdateDto);
 
             return new ResponseEntity<>(HttpStatus.OK);
         } catch(Exception e) {

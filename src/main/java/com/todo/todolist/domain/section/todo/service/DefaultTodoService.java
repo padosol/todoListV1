@@ -9,7 +9,6 @@ import com.todo.todolist.domain.section.todo.repository.TodoRepository;
 import com.todo.todolist.domain.user.entity.UserEntity;
 import com.todo.todolist.domain.user.utils.UserUtils;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -53,12 +52,12 @@ public class DefaultTodoService implements TodoService{
     @Override
     public void modifyTodo(Long todoId, TodoUpdateDto todoUpdateDto) {
 
+        UserEntity userInfo = UserUtils.getUserInfo();
+
         TodoEntity todoEntity = todoRepository.findById(todoId).get();
+        todoEntity.setUserEntity(userInfo);
 
-
-
-
-
+        todoRepository.save(todoEntity);
     }
 
     @Override
