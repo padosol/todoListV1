@@ -13,7 +13,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @DataJpaTest
 class UserRepositoryTest {
 
-
     @Autowired
     private UserRepository userRepository;
 
