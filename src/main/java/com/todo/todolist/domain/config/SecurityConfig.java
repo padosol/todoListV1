@@ -32,6 +32,7 @@ public class SecurityConfig{
     private final AuthenticationConfiguration authenticationConfiguration;
     private final CustomAccessDeniedHandler accessDeniedHandler;
 
+    //test g
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
