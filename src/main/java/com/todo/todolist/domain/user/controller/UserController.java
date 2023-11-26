@@ -39,5 +39,12 @@ public class UserController {
 
     }
 
+    // test
+    @PostMapping("/users")
+    public ResponseEntity<Void> addUsers() {
+
+        return null;
+    }
+
 }
 
