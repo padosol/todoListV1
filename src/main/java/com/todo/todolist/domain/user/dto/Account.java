@@ -2,25 +2,22 @@ package com.todo.todolist.domain.user.dto;
 
 import com.todo.todolist.domain.user.entity.UserEntity;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Builder;
 import lombok.Data;
 
 @Data
-@Builder
-public class UserDto {
+public class Account {
 
     @NotBlank
-    private String userEmail;
+    private String email;
     @NotBlank
     private String password;
-    @NotBlank
-    private String name;
+    private boolean isAgree;
 
-    public UserEntity toEntity(){
+    public UserEntity toEntity() {
         return UserEntity.builder()
-                .username(userEmail)
-                .password(password)
-                .name(name).build();
+                .email(email)
+                .password(password).build();
+
     }
 
 }

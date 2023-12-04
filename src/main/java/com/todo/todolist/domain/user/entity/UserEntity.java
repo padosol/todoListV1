@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -23,16 +24,23 @@ import java.util.List;
 public class UserEntity implements UserDetails {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Column(name = "username", length = 50)
     private String username;
+
+    @Column(name = "email", length = 50, unique = true)
+    private String email;
 
     @Column
     private String password;
 
     @Column
-    private String name;
+    private String role;
 
     @Column
-    private String role;
+    private LocalDateTime createDate;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -47,7 +55,6 @@ public class UserEntity implements UserDetails {
     public String getPassword() {
         return password;
     }
-
 
     @Override
     public String getUsername() {

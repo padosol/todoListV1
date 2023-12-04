@@ -1,5 +1,6 @@
 package com.todo.todolist.domain.security;
 
+import com.todo.todolist.domain.user.dto.Account;
 import lombok.Data;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
@@ -28,17 +29,17 @@ public class CustomAuthenticationFilter extends AbstractAuthenticationProcessing
             throw new IllegalStateException("Authentication is not supported");
         }
 
-        AccountDto accountDto = objectMapper.readValue(request.getReader(), AccountDto.class);
+        Account account = objectMapper.readValue(request.getReader(), Account.class);
 
-        if(!StringUtils.hasLength(accountDto.getUsername())
-                || !StringUtils.hasLength(accountDto.getPassword())) {
+        if(!StringUtils.hasLength(account.getEmail())
+                || !StringUtils.hasLength(account.getPassword())) {
             throw new IllegalArgumentException("username or password is empty");
         }
 
         // 처음에는 인증 되지 않은 토큰 생성
         CustomAuthenticationToken token = new CustomAuthenticationToken(
-                accountDto.getUsername(),
-                accountDto.getPassword()
+                account.getEmail(),
+                account.getPassword()
         );
 
         Authentication authenticate = getAuthenticationManager().authenticate(token);
@@ -55,10 +56,6 @@ public class CustomAuthenticationFilter extends AbstractAuthenticationProcessing
         return false;
     }
 
-    @Data
-    public static class AccountDto {
-        private String username;
-        private String password;
-    }
+
 
 }

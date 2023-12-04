@@ -29,7 +29,7 @@ public class TodoEntity {
     private String state;
 
     @ManyToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "username", referencedColumnName = "username")
+    @JoinColumn(name = "id", referencedColumnName = "id")
     UserEntity userEntity;
 
 
