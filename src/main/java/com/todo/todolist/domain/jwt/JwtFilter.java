@@ -39,12 +39,6 @@ public class JwtFilter extends GenericFilterBean {
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
-
-    /**
-     * 토큰 정보를 꺼내오는 메서드
-     * @param request
-     * @return
-     */
     private String resolveToken(HttpServletRequest request) {
         String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
 

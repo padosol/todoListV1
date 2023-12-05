@@ -45,10 +45,10 @@ public class SecurityConfig{
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/api/hello").permitAll()
                         .requestMatchers("/api/signup").permitAll()
                         .requestMatchers("/api/authenticate").permitAll()
                         .anyRequest().authenticated())
+
                 .addFilterBefore(new JwtFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class)
         ;
 

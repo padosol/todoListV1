@@ -1,10 +1,10 @@
 package com.todo.todolist.domain.user.service;
 
-import com.todo.todolist.domain.user.dto.Account;
+import com.todo.todolist.domain.user.dto.UserDto;
+import com.todo.todolist.domain.user.entity.UserEntity;
 
 public interface UserService {
 
-    void addUsers(Account account);
-
+    UserEntity signUp(UserDto userDto);
 
 }

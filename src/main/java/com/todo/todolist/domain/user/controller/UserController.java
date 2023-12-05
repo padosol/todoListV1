@@ -1,45 +1,42 @@
 package com.todo.todolist.domain.user.controller;
 
-import com.todo.todolist.domain.user.dto.Account;
+import com.todo.todolist.domain.user.dto.UserDto;
+import com.todo.todolist.domain.user.entity.UserEntity;
 import com.todo.todolist.domain.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
 
-    /**
-     * 유저등록
-     * @param account
-     * @return
-     */
-    @PostMapping(value = "/users")
-    public ResponseEntity<Account> regUsers(@RequestBody @Valid Account account) {
-
-        userService.addUsers(account);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    @PostMapping("/signup")
+    public ResponseEntity<UserEntity> signup(@RequestBody @Valid UserDto userDto) {
+        return new ResponseEntity<>(userService.signUp(userDto), HttpStatus.OK);
     }
 
-    @PutMapping(value = "/users")
-    public ResponseEntity<Void> modifyUsers() {
-
-        return null;
+    @PostMapping("/user")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    public ResponseEntity<String> getMyUserInfo() {
+        return ResponseEntity.ok("user");
     }
 
-    @DeleteMapping(value = "/users")
-    public ResponseEntity<Void> removeUsers() {
-
-        return null;
+    @PostMapping("/user/{username}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    public ResponseEntity<String> getUserInfo(@PathVariable String username) {
+        return ResponseEntity.ok("admin");
     }
+
+
 
 }
 
