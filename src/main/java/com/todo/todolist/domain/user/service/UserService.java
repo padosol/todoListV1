@@ -5,6 +5,6 @@ import com.todo.todolist.domain.user.entity.UserEntity;
 
 public interface UserService {
 
-    UserEntity signUp(UserDto userDto);
+    UserEntity signup(UserDto userDto);
 
 }

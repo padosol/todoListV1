@@ -21,7 +21,7 @@ public class UserController {
 
     @PostMapping("/signup")
     public ResponseEntity<UserEntity> signup(@RequestBody @Valid UserDto userDto) {
-        return new ResponseEntity<>(userService.signUp(userDto), HttpStatus.OK);
+        return new ResponseEntity<>(userService.signup(userDto), HttpStatus.OK);
     }
 
     @PostMapping("/user")
