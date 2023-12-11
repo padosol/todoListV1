@@ -12,7 +12,6 @@ public class InsertTodo {
     @Size(min = 1, max = 100)
     private String contents;
 
-
     public TodoEntity toEntity() {
 
         return TodoEntity.builder()
