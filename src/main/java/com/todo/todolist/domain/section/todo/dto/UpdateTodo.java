@@ -5,5 +5,7 @@ import lombok.Data;
 @Data
 public class UpdateTodo {
 
+    private Long todoId;
+    private Boolean status;
 
 }

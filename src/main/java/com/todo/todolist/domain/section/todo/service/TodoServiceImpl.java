@@ -29,7 +29,7 @@ public class TodoServiceImpl implements TodoService{
 
         UserEntity userEntity = userRepository.findOneWithAuthoritiesByEmail(userEmail).get();
 
-        return todoRepository.findAllByUserEntity_Id(userEntity.getId())
+        return todoRepository.findAllByUserEntity_IdOrderByCreateDate(userEntity.getId())
                 .stream()
                 .map(TodoEntity::toDto)
                 .collect(Collectors.toList());
@@ -54,12 +54,19 @@ public class TodoServiceImpl implements TodoService{
     @Override
     public void removeTodo(Long todoId) {
 
-        Optional<TodoEntity> byId = todoRepository.findById(todoId);
+        TodoEntity todoEntity = todoRepository.findById(todoId).orElseThrow();
+        todoRepository.delete(todoEntity);
 
     }
 
     @Override
     public TodoDto modifyTodo(UpdateTodo updateTodo) {
-        return null;
+
+        String userEmail = UserUtils.getUserName();
+
+        TodoEntity todoEntity = todoRepository.findById(updateTodo.getTodoId()).orElseThrow();
+        todoEntity.setStatus(updateTodo.getStatus());
+
+        return todoRepository.save(todoEntity).toDto();
     }
 }

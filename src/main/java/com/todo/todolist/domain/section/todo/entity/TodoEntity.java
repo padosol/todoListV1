@@ -31,7 +31,7 @@ public class TodoEntity {
     @Column
     private boolean status;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne()
     @JoinColumn(name = "id", referencedColumnName = "id")
     UserEntity userEntity;
 

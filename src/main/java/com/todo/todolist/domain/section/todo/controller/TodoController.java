@@ -2,6 +2,7 @@ package com.todo.todolist.domain.section.todo.controller;
 
 import com.todo.todolist.domain.section.todo.dto.InsertTodo;
 import com.todo.todolist.domain.section.todo.dto.TodoDto;
+import com.todo.todolist.domain.section.todo.dto.UpdateTodo;
 import com.todo.todolist.domain.section.todo.service.TodoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -32,9 +33,18 @@ public class TodoController {
         return new ResponseEntity<>(todoDto, HttpStatus.CREATED);
     }
 
+    @PutMapping("/v1/todos")
+    public ResponseEntity<TodoDto> modifyTodos(@RequestBody @Valid UpdateTodo updateTodo) {
+
+        TodoDto todoDto = todoService.modifyTodo(updateTodo);
+
+        return new ResponseEntity<>(todoDto, HttpStatus.OK);
+    }
+
     @DeleteMapping("/v1/todos/{todoId}")
     public ResponseEntity<Void> removeTodos(@PathVariable Long todoId){
 
+        todoService.removeTodo(todoId);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
