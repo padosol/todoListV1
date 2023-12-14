@@ -26,7 +26,7 @@ class UserRepositoryTest {
 
         userRepository.save(user);
 
-        UserEntity userEntity = userRepository.findUserEntityByEmail("test@test.com").get();
+        UserEntity userEntity = userRepository.findOneWithAuthoritiesByEmail("test@test.com").get();
 
         Assertions.assertThat(userEntity.getEmail()).isEqualTo(user.getEmail());
 
