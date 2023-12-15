@@ -32,6 +32,9 @@ public class ProjectController {
                 .bodyToMono(byte[].class)
                 .block();
 
+
+        // 해당 zip 파일을 gitlab 에 올리고 url 반환ㅎ
+
         HttpHeaders headers = new HttpHeaders();
         headers.setContentLength(zipByte.length);
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
