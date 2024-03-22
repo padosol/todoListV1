@@ -8,7 +8,7 @@ public class TodoListApplication {
 
     public static void main(String[] args) {
 
-        System.out.println("CI / CD 4");
+        System.out.println("CI / CD 5");
 
         SpringApplication.run(TodoListApplication.class, args);
     }
