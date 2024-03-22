@@ -7,6 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TodoListApplication {
 
     public static void main(String[] args) {
+
+        System.out.println("CI / CD");
+
         SpringApplication.run(TodoListApplication.class, args);
     }
 
